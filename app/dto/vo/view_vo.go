@@ -6,6 +6,7 @@ type ViewVo struct {
 	ViewId uint64 `json:"viewId"`
 	Gid uint64 `json:"gid"`
 	Uid uint64 `json:"uid"`
+	GroupKey string `json:"groupKey"`
 	Title string `json:"title"`
 	PageSize string `json:"pageSize"`
 	State int  `json:"state"`
@@ -31,7 +32,6 @@ type ButtonVo struct {
 	Title string `json:"title"`
 	Event string `json:"event"`
 	Pid uint64 `json:"pid"`
-	Icon string `json:"icon"`
 	State int `json:"state"`
 }
 
@@ -63,15 +63,24 @@ type OperatorVo struct {
 	State int  `json:"state"`
 }
 
-func NewViewVo(view mysql.View) *ViewVo {
+func NewViewVoSingle(view mysql.View) *ViewVo {
 	return &ViewVo {
 		ViewId: view.ViewId,
 		Gid: view.Gid,
 		Uid: view.Uid,
+		GroupKey: view.GroupKey,
 		Title: view.Title,
 		PageSize: view.PageSize,
 		State: view.State,
 	}
+}
+
+func NewViewVo(viewList mysql.ViewList) []*ViewVo {
+	viewVoList := make([]*ViewVo, len(viewList))
+	for i, view := range viewList {
+		viewVoList[i] = NewViewVoSingle(view)
+	}
+	return viewVoList
 }
 
 func NewHeaderVo(headerList mysql.HeaderList) []HeaderVo {
@@ -103,7 +112,6 @@ func NewButtonVo(buttonList mysql.ButtonList) []ButtonVo {
 			Title :button.Title,
 			Event : button.Event,
 			Pid : button.Pid,
-			Icon : button.Icon,
 			State :button.State,
 		}
 	}

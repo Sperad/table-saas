@@ -12,7 +12,6 @@ type Button struct {
 	Title string
 	Event string
 	Pid uint64
-	Icon string
 	State int
 	IsDeleted int
 }

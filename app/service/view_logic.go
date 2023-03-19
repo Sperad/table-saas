@@ -6,13 +6,19 @@ import (
 )
 
 type ViewLogic struct {
+
 }
 
-
+var ser = ViewService{}
 var wg sync.WaitGroup
 
+func (logic ViewLogic) GetAll(uid uint64, groupKey string)  res.ViewAll {
+	var res = res.ViewAll{}
+	res.ViewList = ser.GetViewAll(uid, groupKey)
+	return res
+}
+
 func (logic ViewLogic) GetSetting(viewId uint64 ) *res.ViewSettingRes {
-	ser := ViewService{}
 	var setting = res.ViewSettingRes{}
 
 	wg.Add(1)

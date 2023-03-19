@@ -9,10 +9,17 @@ type ViewService struct {
 
 }
 
+func (ser ViewService) GetViewAll(uid uint64, groupKey string) []*vo.ViewVo {
+	viewModel := mysql.View{}
+	dataView := viewModel.SelectAll(uid, groupKey)
+	viewVo := vo.NewViewVo(dataView)
+	return viewVo
+}
+
 func (ser ViewService) GetViewByViewId(id uint64 ) *vo.ViewVo {
 	viewModel := mysql.View{}
 	dataView := viewModel.SelectById(id)
-	viewVo := vo.NewViewVo(dataView)
+	viewVo := vo.NewViewVoSingle(dataView)
 	return viewVo
 }
 

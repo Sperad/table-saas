@@ -10,9 +10,11 @@ import (
 func Start()  {
 	r := gin.Default()
 
-	tableV1 := r.Group("/api/table/v1")
+	viewV1 := r.Group("/api/view/v1")
 	{
-		tableV1.GET("/view/get_by_id", controller.TableGetById)
+		viewV1.GET("/get_all", controller.ViewGetAll)
+		viewV1.GET("/get_by_id", controller.ViewGetById)
+		viewV1.POST("/add", controller.ViewAdd)
 	}
 
 	port := config.App.Port

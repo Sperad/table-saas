@@ -10,3 +10,7 @@ type ViewSettingRes struct {
 	Enum[] vo.EnumVo `json:"enum"`
 	Operator[] vo.OperatorVo `json:"operator"`
 }
+
+type ViewAll struct {
+	ViewList []*vo.ViewVo `json:"viewList"`
+}
