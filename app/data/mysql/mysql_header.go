@@ -21,7 +21,7 @@ type Header struct {
 
 type HeaderList []Header
 
-func (header HeaderList) SelectByViewId(viewId uint64) []Header {
+func (header HeaderList) SelectByViewId(viewId uint64) HeaderList {
 	db, _ := mysql2.GetMysqlPool()
 	dataHeader := HeaderList{}
 	db.Table("t_header").Where("view_id = ?", viewId).Find(&dataHeader)

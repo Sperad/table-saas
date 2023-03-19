@@ -15,9 +15,11 @@ type Operator struct {
 	IsDeleted int
 }
 
-func (operator Operator) SelectByViewId(viewId uint64)  Operator {
+type OperatorList []Operator
+
+func (operator OperatorList) SelectByViewId(viewId uint64)  OperatorList {
 	db, _ := mysql2.GetMysqlPool()
-	operatorData := Operator{}
+	operatorData := OperatorList{}
 	db.Table("t_operator").Where("view_id = ?", viewId).Find(&operatorData)
 	return operatorData
 }

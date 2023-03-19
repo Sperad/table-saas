@@ -20,7 +20,7 @@ func TableGetById(c *gin.Context)  {
 		return
 	}
 
-	ser := service.ViewService{}
+	ser := service.ViewLogic{}
 	res := ser.GetSetting(viewIdInt)
 	c.JSON(http.StatusOK,res)
 }

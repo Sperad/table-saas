@@ -15,9 +15,11 @@ type Enum struct {
 	IsDeleted int
 }
 
-func (enum Enum) SelectByViewId(viewId uint64) Enum {
+type EnumList []Enum
+
+func (enum EnumList) SelectByViewId(viewId uint64) EnumList {
 	db, _ := mysql2.GetMysqlPool()
-	enumData := Enum{}
+	enumData := EnumList{}
 	db.Table("t_enum").Where("view_id = ?", viewId).Find(&enumData)
 	return enumData
 }

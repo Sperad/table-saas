@@ -16,9 +16,11 @@ type Filter struct {
 	IsDeleted int
 }
 
-func (filter Filter) SelectByViewId(viewId uint64) Filter {
+type FilterList []Filter
+
+func (filter FilterList) SelectByViewId(viewId uint64) FilterList {
 	db, _ := mysql2.GetMysqlPool()
-	filterData :=Filter{}
+	filterData :=FilterList{}
 	db.Table("t_filter").Where("view_id = ?", viewId).Find(&filterData)
 	return filterData
 }

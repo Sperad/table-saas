@@ -19,7 +19,7 @@ type Button struct {
 
 type ButtonList []Button
 
-func (button Button) SelectByViewId(viewId uint64) []Button {
+func (button ButtonList) SelectByViewId(viewId uint64) ButtonList {
 	db, _ := mysql2.GetMysqlPool()
 	buttonData := ButtonList{}
 	db.Table("t_button").Where("view_id = ?", viewId).Find(&buttonData)
